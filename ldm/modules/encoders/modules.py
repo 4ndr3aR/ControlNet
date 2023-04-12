@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch.utils.checkpoint import checkpoint
 
 from transformers import T5Tokenizer, T5EncoderModel, CLIPTokenizer, CLIPTextModel
+from transformers import AutoTokenizer, AutoModel
 
 import open_clip
 from ldm.util import default, count_params
@@ -96,8 +97,12 @@ class FrozenCLIPEmbedder(AbstractEncoder):
                  freeze=True, layer="last", layer_idx=None):  # clip-vit-base-patch32
         super().__init__()
         assert layer in self.LAYERS
-        self.tokenizer = CLIPTokenizer.from_pretrained(version)
-        self.transformer = CLIPTextModel.from_pretrained(version)
+        #self.tokenizer = CLIPTokenizer.from_pretrained(version)
+        #self.tokenizer = CLIPTokenizer.from_pretrained('../clip-vit-large-patch14', local_files_only=True)
+        self.tokenizer = AutoTokenizer.from_pretrained("clip-vit-large-patch14-offline-saved")
+        #self.transformer = AutoModel.from_pretrained("clip-vit-large-patch14-offline-saved")
+        #self.transformer = CLIPTextModel.from_pretrained(version)
+        self.transformer = CLIPTextModel.from_pretrained("clip-vit-large-patch14-offline-saved")
         self.device = device
         self.max_length = max_length
         if freeze:

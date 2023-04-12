@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+#import os
+#os.environ['HTTP_PROXY'] = 'http://192.168.2.219:3128'
+#os.environ['HTTPS_PROXY'] = 'https://192.168.2.219:3128'
+
 from share import *
 import config
 
@@ -14,6 +20,17 @@ from annotator.uniformer import UniformerDetector
 from cldm.model import create_model, load_state_dict
 from cldm.ddim_hacked import DDIMSampler
 
+
+#from transformers import CLIPTokenizer
+
+
+#asdf_tokenizer = CLIPTokenizer.from_pretrained('../clip-vit-large-patch14', local_files_only=True)
+#from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModel
+#asdf_tokenizer = AutoTokenizer.from_pretrained("clip-vit-large-patch14-offline-saved")
+#asdf_model = AutoModel.from_pretrained("clip-vit-large-patch14-offline-saved")
+
+#print(f'{asdf_tokenizer = }')
+#print(f'{asdf_model = }')
 
 apply_uniformer = UniformerDetector()
 
@@ -94,4 +111,4 @@ with block:
     run_button.click(fn=process, inputs=ips, outputs=[result_gallery])
 
 
-block.launch(server_name='0.0.0.0')
+block.launch(server_name='91.81.200.194', server_port=50020, share=False)

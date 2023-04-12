@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from share import *
 import config
 
@@ -95,4 +96,5 @@ with block:
     run_button.click(fn=process, inputs=ips, outputs=[result_gallery])
 
 
-block.launch(server_name='0.0.0.0')
+#block.launch(server_name='0.0.0.0')
+block.launch(server_name='91.81.200.194', server_port=50020, share=False)
